@@ -8,8 +8,10 @@
 function isPalindrome(x: number): boolean {
     if (x < 0) return false;
     const num = x.toString();
-    for (var i = 0; i < num.length / 2; i++) {
-        if (num[i] !== num[num.length - 1 - i]) return false;
+    var i = 0;
+    var j = num.length - 1;
+    while (i < j) {
+        if (num[i++] !== num[j--]) return false;
     }
     return true;
 };
