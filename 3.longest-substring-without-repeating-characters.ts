@@ -5,6 +5,7 @@
  */
 
 // @lc code=start
+// @ts-ignore
 function lengthOfLongestSubstring(s: string): number {
     const str = s.split('');
     const minLens: number[] = new Array(s.length).fill(0);
