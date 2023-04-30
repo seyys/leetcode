@@ -8,27 +8,26 @@
 class Solution:
     def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
         nums = sorted(nums)
-        # Populate hashtable
-        hashtable = {}
-        for i, num in enumerate(nums):
-            if num not in hashtable:
-                hashtable[num] = i
-                continue
-            hashtable[num] = max(i, hashtable[num])
         result = []
         i = 0
         while i < len(nums) - 3:
             j = i + 1
             while j < len(nums) - 2:
-                k = j + 1
-                while k < len(nums) - 1:
-                    remainder = target - (nums[i] + nums[j] + nums[k])
-                    if remainder in hashtable:
-                        if hashtable[remainder] > k:
-                            result.append([nums[i], nums[j], nums[k], remainder])
-                    k += 1
-                    while k < len(nums) - 1 and nums[k] == nums[k - 1]:
-                        k += 1    
+                left = j + 1
+                right = len(nums) - 1
+                while left < right:
+                    sum_vals = nums[i] + nums[j] + nums[left] + nums[right]
+                    if sum_vals == target:
+                        result.append([nums[i], nums[j], nums[left], nums[right]])
+                        break
+                    elif sum_vals < target:
+                        left += 1
+                        while left < right and nums[left] == nums[left - 1]:
+                            left += 1
+                    else:
+                        right -= 1
+                        while left < right and nums[right] == nums[right + 1]:
+                            right -= 1
                 j += 1
                 while j < len(nums) - 2 and nums[j] == nums[j - 1]:
                     j += 1
