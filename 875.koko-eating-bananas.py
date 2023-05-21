@@ -8,18 +8,18 @@
 class Solution:
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
         high = max(piles)
-        low = 0
+        low = 1
+        minSpeed = high
 
-        while low < high - 1:
+        while low <= high:
             mid = (high + low) // 2
             t = sum((x - 1) // mid + 1 for x in piles)
-            print(low, high, mid, t)
             if t > h:
-                low = mid
+                low = mid + 1
             else:
-                high = mid
+                minSpeed = min(minSpeed, mid)
+                high = mid - 1
 
-        print(low, high)
-        return high
+        return minSpeed
 
 # @lc code=end
